@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Lock"
+AuthUserFile /xampp/htdocs/e_booker/.htpassword
+Require valid-user
