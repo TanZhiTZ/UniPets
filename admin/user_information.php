@@ -24,10 +24,18 @@ if (isset($_SESSION['role'])) {
     <div class="container">
         <?php include('sidebar.php'); ?>
         <div class="main-content">
-            <h2>Welcome to the Admin Dashboard</h2>
-            <p>Select a section from the sidebar to manage.</p>
-        </div>
+            <h2>User Information</h2>
+            <!-- Add forms to update/view user info here -->
+            <form action="user_information_process.php" method="POST">
+                <label for="userName">User Name:</label>
+                <input type="text" id="userName" name="userName"><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+
+                <input type="submit" value="Update User Info">
+            </form>
+        </div>    
     </div>
-    <script src="js/adminScript.js"></script>
 </body>
 </html>

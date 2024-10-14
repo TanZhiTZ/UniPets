@@ -24,10 +24,18 @@ if (isset($_SESSION['role'])) {
     <div class="container">
         <?php include('sidebar.php'); ?>
         <div class="main-content">
-            <h2>Welcome to the Admin Dashboard</h2>
-            <p>Select a section from the sidebar to manage.</p>
+            <h2>Inventory List</h2>
+            <!-- Display list of inventory -->
+            <form action="inventory_list_process.php" method="POST">
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" name="itemName"><br><br>
+
+                <label for="itemQuantity">Quantity:</label>
+                <input type="number" id="itemQuantity" name="itemQuantity"><br><br>
+
+                <input type="submit" value="Update Inventory">
+            </form>
         </div>
     </div>
-    <script src="js/adminScript.js"></script>
 </body>
 </html>

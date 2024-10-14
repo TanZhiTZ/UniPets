@@ -24,10 +24,21 @@ if (isset($_SESSION['role'])) {
     <div class="container">
         <?php include('sidebar.php'); ?>
         <div class="main-content">
-            <h2>Welcome to the Admin Dashboard</h2>
-            <p>Select a section from the sidebar to manage.</p>
+            <h2>Pet Information</h2>
+            <!-- Add forms to update/view pet info here -->
+            <form action="pet_information_process.php" method="POST">
+                <label for="petName">Pet Name:</label>
+                <input type="text" id="petName" name="petName"><br><br>
+                
+                <label for="petType">Pet Type:</label>
+                <input type="text" id="petType" name="petType"><br><br>
+
+                <label for="petAge">Age:</label>
+                <input type="number" id="petAge" name="petAge"><br><br>
+
+                <input type="submit" value="Update Pet Info">
+            </form>
         </div>
     </div>
-    <script src="js/adminScript.js"></script>
 </body>
 </html>

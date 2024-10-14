@@ -24,10 +24,18 @@ if (isset($_SESSION['role'])) {
     <div class="container">
         <?php include('sidebar.php'); ?>
         <div class="main-content">
-            <h2>Welcome to the Admin Dashboard</h2>
-            <p>Select a section from the sidebar to manage.</p>
+            <h2>Adoption Applications</h2>
+            <!-- Display list of applications -->
+            <table>
+                <tr>
+                    <th>Application ID</th>
+                    <th>User ID</th>
+                    <th>Pet ID</th>
+                    <th>Status</th>
+                </tr>
+                <!-- Populate with application data -->
+            </table>
         </div>
     </div>
-    <script src="js/adminScript.js"></script>
 </body>
 </html>

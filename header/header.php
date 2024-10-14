@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
     if ($role == "user") {
         header('location:login.php');
     } else if ($role == "admin") {
-        header('location:admin/admin.php');
+        header('location:admin/admin-index.php');
     }
 
  }else{
