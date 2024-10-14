@@ -41,7 +41,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             <!-- Donation Options -->
             <form id="donationForm" action="donation-process.php" method="POST">
                 <!-- Input Field -->
-                <input type="" name="donorName" id="donorName" class="custom-input"value="" placeholder="Donor name" style="margin-bottom: 30px; margin-right:auto;" required>
+                <input type="" name="donorName" id="donorName" class="custom-input" value="" placeholder="Donor name" style="margin-bottom: 30px; margin-right:auto;" required>
                 , donation RM <input type="" name="donationAmount" class="custom-input" id="donationAmount" value="" placeholder="Enter donation amount!" style="margin-bottom: 30px; margin-left:auto;">
             
                 <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;">

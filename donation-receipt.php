@@ -1,9 +1,9 @@
 <?php
 include('config/constants.php');
 
-$id = $_GET['id'];
+$donationId = $_GET['donationId'];
 
-$sql = "SELECT * FROM donation WHERE donationId= '$id'";
+$sql = "SELECT * FROM donation WHERE donationId= '$donationId'";
 $res = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($res);
 
@@ -47,7 +47,7 @@ if($count>0)
 
     <div class="receipt-details">
         <p style="color:black;"><strong>Name:</strong> <?php echo $donorName; ?></p>
-        <p style="color:black;"><strong>Donation ID:</strong> <?php echo $id; ?></p>
+        <p style="color:black;"><strong>Donation ID:</strong> <?php echo $donationId; ?></p>
         <p style="color:black;"><strong>Donation Amount:</strong> RM<?php echo number_format($donationAmount, 2); ?></p>
         <p style="color:black;"><strong>Date:</strong> <?php echo $donationDate; ?></p>
         <p style="color:black;"><strong>Payment Method:</strong> <?php echo $paymentMethod; ?></p>
@@ -58,7 +58,7 @@ if($count>0)
     </div>
 
     <!-- Download Receipt Button -->
-    <a href="download-receipt.php?donation_id=<?php echo $id; ?>" style="color:white;" class="download-button">Download Receipt</a>
+    <a href="download-donation-receipt.php?donation_id=<?php echo $donationId; ?>" style="color:white;" class="download-button">Download Receipt</a>
 </div>
 
 </body>

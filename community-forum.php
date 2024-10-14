@@ -1,11 +1,11 @@
 <?php
 include('config/constants.php');
 
-$sql = "SELECT * FROM post";
+$sql = "SELECT * FROM post ORDER BY dateCreated DESC";
 $res = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($res);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +13,7 @@ $count = mysqli_num_rows($res);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNIPETS | Community Forum</title>
     <link rel="stylesheet" href="css/forumStyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 </head>
 <body>
     <div class="forum-container">
@@ -25,33 +26,30 @@ $count = mysqli_num_rows($res);
             </div>
         </div>
 
-        <?php
-            if($count>0) {
-                while($row=mysqli_fetch_assoc($res)) {
+        <ul class="forum-posts" id="forum-posts">
+            <?php
+            if($count > 0) {
+                while($row = mysqli_fetch_assoc($res)) {
                     $postId = $row['postId'];
                     $userId = $row['userId'];
                     $userName = $row['userName'];
-                    $topicId = $row['topicId'];
                     $title = $row['title'];
-                    $content = $row['content'];
                     $dateCreated = $row['dateCreated'];
 
                     echo "
-                    <ul class='forum-posts' id='forum-posts'>
-                        <!-- Example forum post -->
-                        <li class='forum-post'>
-                            <div class='forum-post-details'>
-                                <p class='forum-post-title'>$title</p>
-                                <p class='forum-post-meta'>Date: $dateCreated <br/> Author: $userName</p>
-                            </div>
-                            <div class='forum-post-votes'>
-                                <span class='thumb'>👍</span><span>like</span>
-                            </div>
-                        </li>
-                    </ul>";
+                    <li class='forum-post'>
+                        <div class='forum-post-details'>
+                            <a href='viewPost.php?postId=$postId' class='forum-post-title'>$title</a>
+                            <p class='forum-post-meta'>Date: $dateCreated <br/> 
+                            Author: <a href='viewAuthor.php?userId=$userId'>$userName</a></p>
+                        </div>
+                    </li>";
                 }
+            } else {
+                echo "<p>No posts available.</p>";
             }
-        ?>
+            ?>
+        </ul>
     </div>
 
     <!-- Forum Button -->
@@ -61,60 +59,25 @@ $count = mysqli_num_rows($res);
 
     <script>
         function showPosts(period) {
-            const buttons = document.querySelectorAll('.forum-tabs button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            const posts = document.getElementById('forum-posts');
-
-            if (period === 'all') {
-                buttons[0].classList.add('active');
-                posts.innerHTML = `
-                    <li class="forum-post">
-                        <div class="forum-post-details">
-                            <p class="forum-post-title">First ever forum post</p>
-                            <p class="forum-post-meta">ThisUser posted in Community | 3 Comments</p>
-                        </div>
-                        <div class="forum-post-votes">
-                            <span class="thumb">👍</span><span>65</span>
-                        </div>
-                    </li>
-                    <li class="forum-post">
-                        <div class="forum-post-details">
-                            <p class="forum-post-title">A post about tech news goes here</p>
-                            <p class="forum-post-meta">AnotherUser posted in News | 0 Comments</p>
-                        </div>
-                        <div class="forum-post-votes">
-                            <span class="thumb">👍</span><span>32</span>
-                        </div>
-                    </li>
-                `;
-            } else if (period === 'week') {
-                buttons[1].classList.add('active');
-                posts.innerHTML = `
-                    <li class="forum-post">
-                        <div class="forum-post-details">
-                            <p class="forum-post-title">A weekly tech update</p>
-                            <p class="forum-post-meta">User2 posted in Updates | 5 Comments</p>
-                        </div>
-                        <div class="forum-post-votes">
-                            <span class="thumb">👍</span><span>45</span>
-                        </div>
-                    </li>
-                `;
-            } else if (period === 'month') {
-                buttons[2].classList.add('active');
-                posts.innerHTML = `
-                    <li class="forum-post">
-                        <div class="forum-post-details">
-                            <p class="forum-post-title">Monthly discussion on AI</p>
-                            <p class="forum-post-meta">User3 posted in AI | 10 Comments</p>
-                        </div>
-                        <div class="forum-post-votes">
-                            <span class="thumb">👍</span><span>85</span>
-                        </div>
-                    </li>
-                `;
-            }
+            $.ajax({
+                url: 'fetchPosts.php', // PHP file that fetches posts based on the period
+                type: 'GET',
+                data: { period: period },
+                success: function(data) {
+                    $('#forum-posts').html(data);
+                    $('.forum-tabs button').removeClass('active');
+                    if (period === 'all') {
+                        $('.forum-tabs button:first').addClass('active');
+                    } else if (period === 'week') {
+                        $('.forum-tabs button:nth-child(2)').addClass('active');
+                    } else if (period === 'month') {
+                        $('.forum-tabs button:last').addClass('active');
+                    }
+                },
+                error: function() {
+                    $('#forum-posts').html("<p>Error loading posts.</p>");
+                }
+            });
         }
     </script>
 </body>

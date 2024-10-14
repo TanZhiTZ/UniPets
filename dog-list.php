@@ -4,22 +4,22 @@ include('config/constants.php');
 
 $limit = 6;
 
-// default page = 1
+// Get the current page number from the URL default = 1
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
 // Calculate the offset for the SQL query
 $offset = ($page - 1) * $limit;
 
-// Total number of products
-$total_pets_sql = "SELECT COUNT(*) as total FROM accessories";
+// Get the total number of pets
+$total_pets_sql = "SELECT COUNT(*) as total FROM pet WHERE species='dog' && adoptionStatus='0'";
 $total_pets_result = mysqli_query($conn, $total_pets_sql);
 $total_pets_row = mysqli_fetch_assoc($total_pets_result);
 $total_pets = $total_pets_row['total'];
 
-// Total number of pages
+// Calculate the total number of pages
 $total_pages = ceil($total_pets / $limit);
 
-$sql = "SELECT * FROM accessories LIMIT $limit OFFSET $offset";
+$sql = "SELECT * FROM pet WHERE species='dog'  && adoptionStatus='0' LIMIT $limit OFFSET $offset";
 $res = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($res);
 
@@ -27,7 +27,7 @@ $count = mysqli_num_rows($res);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>UNIPETS | Accessories</title>
+<title>UNIPETS | Pets List</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -45,13 +45,13 @@ $count = mysqli_num_rows($res);
     <div class="header">
             <?php include('header/header.php'); ?>
     </div>
-
+    
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="products.php"><p class="glow-font">All Items</p></a></li>
-                <li><a href="cat-products.php"><p class="glow-font">Cat Accessories</p></a></li>
-                <li><a href="dog-products.php"><p>Dog Accessories</p></a></li>
+                <li><a href="pet-list.php"><p class="glow-font">All</p></a></li>
+                <li><a href="cat-list.php"><p class="glow-font">Cats</p></a></li>
+                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="dogList.php"><p>Dogs</p></a></li>
             </ul>
         </div>
         <div class="product-grid">
@@ -60,23 +60,23 @@ $count = mysqli_num_rows($res);
                 {
                     while($row=mysqli_fetch_assoc($res))
                     {
-                        $accessoriesId = $row['accessoriesId'];
-                        $productImg = $row['productImg'];
-                        $productName = $row['productName'];
-                        $productDescription = $row['productDescription'];
-                        $price = $row['price'];
-                        $stockQuantity = $row['stockQuantity'];
+                        $petId = $row['petId'];
+                        $petName = $row['petName'];
+                        $img = $row['img'];
+                        $breed = $row['breed'];
+                        $age = $row['age'];
+                        $gender = $row['gender'];
 
                         echo "<div class='product-card' onclick=";
                         echo '"window.location.href=';
-                        echo "'product-description.php?product_id=$accessoriesId';";
+                        echo "'pet-description.php?pet_id=$petId';";
                         echo '">';
                         echo "
                             <div class='image-wrapper'>
-                                    <img src='img/products/$productImg' alt='$productName'>
+                                    <img src='img/pets/$img' alt='$petName' class='product-img'>
                                 </div>
-                                <div class='product-title'><p>$productName</p></div>
-                                <div class='product-price'><p style='color: #73d3ff;'>RM $price</p></div>
+                                <div class='product-title'><p>$petName $gender</p></div>
+                                <div class='product-price'><p>$age | $breed</p></div>
                             </div>
                         ";
                     }
@@ -89,7 +89,7 @@ $count = mysqli_num_rows($res);
     <ul class="pagination">
         <?php for($i = 1; $i <= $total_pages; $i++): ?>
             <li class="<?php if($i == $page) echo 'active'; ?>">
-                <a href="products.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <a href="dog-list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
             </li>
         <?php endfor; ?>
     </ul>

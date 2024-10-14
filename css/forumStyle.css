@@ -115,6 +115,31 @@ body {
     background-color: #007bff; /* Lighter blue on hover */
 }
 
+.back-button {
+    background-color: #626262e3;
+    color: white;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.back-button:hover {
+    background-color: #959595c2;
+    box-shadow: 0 7px 20px rgba(148, 164, 181, 0.5);
+}
+
+.back-button:active {
+    background-color: #6d6d6d;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

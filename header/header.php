@@ -15,7 +15,15 @@ if(isset($_POST['submit'])){
     $_SESSION['userId'] = $row['userId'];
     $_SESSION['userName'] = $row['userName'];
     $_SESSION['userEmail'] = $row['email'];
-    header('location:login.php');
+    $_SESSION['role'] = $row['role'];
+    $role = $_SESSION['role'];
+    
+    if ($role == "user") {
+        header('location:login.php');
+    } else if ($role == "admin") {
+        header('location:admin/admin.php');
+    }
+
  }else{
     echo '<script>alert("Incorrect email or password!")</script>';
  }
@@ -177,21 +185,21 @@ document.getElementById('registration').addEventListener('submit', function(even
                 <a href="/UniPets" aria-current="page" tabindex="0">HOME</a>
             </div>
             <div class="header-nav-item header-nav-item--collection underline-hover">
-                <a href="aboutUs.php" tabindex="0">ABOUT US</a>
+                <a href="about-us.php" tabindex="0">ABOUT US</a>
             </div>
             <div class="header-nav-item header-nav-item--folder underline-hover">
-                <a class="header-nav-folder-title" href="petList.php" tabindex="0">ADOPT</a>
+                <a class="header-nav-folder-title" href="pet-list.php" tabindex="0">ADOPT</a>
                 <div class="header-nav-folder-content">
                     <div class="header-nav-folder-item">
-                        <a href="catList.php" tabindex="0">CATS</a>
+                        <a href="cat-list.php" tabindex="0">CATS</a>
                     </div>
                     <div class="header-nav-folder-item">
-                        <a href="dogList.php" tabindex="0">DOGS</a>
+                        <a href="dog-list.php" tabindex="0">DOGS</a>
                     </div>
                 </div>
             </div>
             <div class="header-nav-item header-nav-item--folder underline-hover">
-                <a class="header-nav-folder-title" href="aboutpets.php" tabindex="0">ABOUT PETS</a>
+                <a class="header-nav-folder-title" href="about-pets.php" tabindex="0">ABOUT PETS</a>
                 <div class="header-nav-folder-content">
                     <div class="header-nav-folder-item">
                         <a href="products.php" tabindex="0">PET ACCESSORIES</a>
@@ -211,34 +219,32 @@ document.getElementById('registration').addEventListener('submit', function(even
             $id = $_SESSION['userId'];
             // ini_set('display_errors', 0);
 
-            // $json = file_get_contents("http://localhost/e_booker/api/product/read_cart.php?id=$id");
-            // $data = json_decode($json);
-
-            if ($data != null) {
-                echo "
-                <th width='10%' style='display: table-cell; justify-content: center;'>
-                        <a href='cart.php'>
-                            <span class='material-symbols-outlined'>
-                                    shopping_cart_checkout
-                            </span>
-                        </a>
-                    </th>
-                    ";
-            }
-            
-            
             echo "
-            <th width='10%'></th>
+            <th width='7%'></th>
             <th width='10%'>
                     <div align='center'>
                         <b>
-                            <a href='user_profile.php?id=$id' style='color: black; font-size:16px;'>$name</a>
+                            <a href='user-profile.php?id=$id' style='color: black; font-size:16px;'>$name</a>
                         </b>
                     </div>
                 </th>
+                
+                <th width='3%' style='display: table-cell; justify-content: center;'>
+                    <a href='cart.php'>
+                        <span class='material-symbols-outlined'>
+                                shopping_cart_checkout
+                        </span>
+                    </a>
+                </th>
+
                 <th width='10%'>
                 <center><a href='config/logout.php'>Log Out</a></center>
-                </th>";
+                </th>
+            
+                ";
+            
+            echo "
+            ";
             
         } else {
 

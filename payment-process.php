@@ -1,9 +1,11 @@
 <?php
 include('config/constants.php');
 
+$userId = $_SESSION['userId'];
+$userName = $_SESSION['userName'];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $donationAmount = $_POST['donationAmount'];
-    $donorName = $_POST['donorName'];
+    $paymentAmount = $_POST['paymentAmount'];
     $paymentMethod = $_POST['paymentMethod'];
 }
 ?>
@@ -62,17 +64,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php
                     //ini_set('display_errors', 0);
                     if (isset($_POST['submit'])) {
-                            $donationId = rand(1000000, 9999999);
-                            
-                            $sql = "SELECT * FROM donation WHERE donationId= '$donationId'";
+                            $orderId = rand(1000000, 9999999);
+
+                            $sql = "SELECT * FROM purchaseorder WHERE orderId= '$orderId'";
                             $res = mysqli_query($conn, $sql);
                             $count = mysqli_num_rows($res);
 
                             if($count == 0){
-                                $query = "INSERT INTO donation (donationId, donorName, donationAmount, paymentMethod) VALUES ('$donationId', '$donorName', '$donationAmount', '$paymentMethod')";
-                                if ($conn->query($query)) {
-                                    header('location:donation-receipt.php?donationId='.$donationId);
+                                $queryInsert = "INSERT INTO purchaseorder (orderId, userId, userName, totalAmount, paymentMethod) VALUES ('$orderId', '$userId', '$userName', '$paymentAmount', '$paymentMethod')";
+                                
+                                $querySelect = "SELECT * FROM cartitem WHERE userId = '$userId'";
+                                $sel = mysqli_query($conn, $querySelect);
+
+                                //Update accessories quantity and remove data from cart
+                                while($row=mysqli_fetch_assoc($sel)) {
+                                    $accessoriesId = $row['accessoriesId'];
+                                    $quantity = $row['quantity'];
+
+                                    $queryQuantity = "SELECT * FROM accessories WHERE accessoriesId = '$accessoriesId'";
+                                    $que = mysqli_query($conn, $queryQuantity);
+                                    $stockQuantity = mysqli_fetch_assoc($que)['stockQuantity'];
+
+                                    $newQuantity = $stockQuantity - $quantity;
+
+                                    $queryUpdate = "UPDATE accessories  SET stockQuantity='$newQuantity' WHERE accessoriesId='$accessoriesId'";
+                                    mysqli_query($conn, $queryUpdate);    
+                                }
+                                $queryDelete = "DELETE FROM cartitem WHERE userId = '$userId'";
+
+                                if ($conn->query($queryInsert)) {
+                                    mysqli_query($conn, $queryDelete);
+                                    header('location:payment-receipt.php?orderId='.$orderId);
                                 } else {
+                                    $orderId = rand(1000000, 9999999);
                                     echo 'Error: ' . $conn->error;
                                 }
                             }

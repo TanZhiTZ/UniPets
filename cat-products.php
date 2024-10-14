@@ -11,7 +11,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
 // Total number of products
-$total_pets_sql = "SELECT COUNT(*) as total FROM accessories";
+$total_pets_sql = "SELECT COUNT(*) as total FROM accessories WHERE category='Cats'";
 $total_pets_result = mysqli_query($conn, $total_pets_sql);
 $total_pets_row = mysqli_fetch_assoc($total_pets_result);
 $total_pets = $total_pets_row['total'];
@@ -19,7 +19,7 @@ $total_pets = $total_pets_row['total'];
 // Total number of pages
 $total_pages = ceil($total_pets / $limit);
 
-$sql = "SELECT * FROM accessories LIMIT $limit OFFSET $offset";
+$sql = "SELECT * FROM accessories WHERE category='Cats' LIMIT $limit OFFSET $offset";
 $res = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($res);
 
@@ -49,8 +49,8 @@ $count = mysqli_num_rows($res);
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="products.php"><p class="glow-font">All Items</p></a></li>
-                <li><a href="cat-products.php"><p class="glow-font">Cat Accessories</p></a></li>
+                <li><a href="products.php"><p class="glow-font">All Items</p></a></li>
+                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="cat-products.php"><p class="glow-font">Cat Accessories</p></a></li>
                 <li><a href="dog-products.php"><p>Dog Accessories</p></a></li>
             </ul>
         </div>
@@ -89,7 +89,7 @@ $count = mysqli_num_rows($res);
     <ul class="pagination">
         <?php for($i = 1; $i <= $total_pages; $i++): ?>
             <li class="<?php if($i == $page) echo 'active'; ?>">
-                <a href="products.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <a href="cat-products.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
             </li>
         <?php endfor; ?>
     </ul>

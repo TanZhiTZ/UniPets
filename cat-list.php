@@ -49,9 +49,9 @@ $count = mysqli_num_rows($res);
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li><a href="petList.php"><p class="glow-font">All</p></a></li>
+                <li><a href="pet-list.php"><p class="glow-font">All</p></a></li>
                 <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="catList.php"><p>Cats</p></a></li>
-                <li><a href="dogList.php"><p class="glow-font">Dogs</p></a></li>
+                <li><a href="dog-list.php"><p class="glow-font">Dogs</p></a></li>
             </ul>
         </div>
         <div class="product-grid">
@@ -67,14 +67,17 @@ $count = mysqli_num_rows($res);
                         $age = $row['age'];
                         $gender = $row['gender'];
 
+                        echo "<div class='product-card' onclick=";
+                        echo '"window.location.href=';
+                        echo "'pet-description.php?pet_id=$petId';";
+                        echo '">';
                         echo "
-                        <div class='product-card'>
-                        <div class='image-wrapper'>
-                                <img src='img/pets/$img' alt='$petName' class='product-img'>
+                            <div class='image-wrapper'>
+                                    <img src='img/pets/$img' alt='$petName' class='product-img'>
+                                </div>
+                                <div class='product-title'><p>$petName $gender</p></div>
+                                <div class='product-price'><p>$age | $breed</p></div>
                             </div>
-                            <div class='product-title'><p>$petName $gender</p></div>
-                            <div class='product-price'><p>$age | $breed</p></div>
-                        </div>
                         ";
                     }
                 }
@@ -86,7 +89,7 @@ $count = mysqli_num_rows($res);
     <ul class="pagination">
         <?php for($i = 1; $i <= $total_pages; $i++): ?>
             <li class="<?php if($i == $page) echo 'active'; ?>">
-                <a href="catList.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <a href="cat-list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
             </li>
         <?php endfor; ?>
     </ul>

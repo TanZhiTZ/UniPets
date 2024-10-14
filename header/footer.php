@@ -23,9 +23,9 @@
             <tr>
                 <td style="padding-right:70px; padding-left:70px;">
                     <h3>Page Information</h3>
-                    <p><a href="aboutUs.php" style="font-family:'verdana'" class="open-login-btn">About Us</a></p>
+                    <p><a href="about-us.php" style="font-family:'verdana'" class="open-login-btn">About Us</a></p>
                     <p><a href="petList.php" style="font-family:'verdana'" class="open-login-btn">Adopt New Pets</a></p>
-                    <p><a href="aboutPets.php" style="font-family:'verdana'" class="open-login-btn">Information About Pets</a></p>
+                    <p><a href="about-pets.php" style="font-family:'verdana'" class="open-login-btn">Information About Pets</a></p>
                     <p><a href="products.php" style="font-family:'verdana'" class="open-login-btn">Pet Accessories</a></p>
                     <p><a href="donation.php" style="font-family:'verdana'" class="open-login-btn">Donate To Us!</a></p>
                 </td>
