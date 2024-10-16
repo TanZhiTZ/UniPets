@@ -39,10 +39,10 @@
         <div id="categories">
             <ul class="header container-fluid" style="width: 50%;" action="pets.php" role="" method="POST">
                 <li class="left-right-margin scroll-up-animation" style="transition: .6s; margin-bottom: 20px;">
-                    <a href="catList.php" class="header"><button class="btn-frame shadow" type="submit"><span><img src="css/img/cat-icon.png" width="100px"/></span></button></a>
+                    <a href="cat-list.php" class="header"><button class="btn-frame shadow" type="submit"><span><img src="css/img/cat-icon.png" width="100px"/></span></button></a>
                 </li>
                 <li class="left-right-margin scroll-up-animation" style="transition: .8s;">
-                    <a href="dogList.php" class="header"><button class="btn-frame shadow" type="submit"><span><img src="css/img/dog-icon.png" width="100px"/></span></button></a>
+                    <a href="dog-list.php" class="header"><button class="btn-frame shadow" type="submit"><span><img src="css/img/dog-icon.png" width="100px"/></span></button></a>
                 </li>
                 <li class="left-right-margin scroll-up-animation" style="transition: 1s;">
                     <a href="products.php" class="header"><button class="btn-frame shadow"><span><img src="css/img/pet-food.png" width="100px"/></span></button></a>

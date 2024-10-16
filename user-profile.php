@@ -28,7 +28,7 @@ if ($res == true && mysqli_num_rows($res) == 1) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body style="justify-content: center; align-items: center;">
+<body style="justify-content: center; align-items: center;">
     <!-- Background -->
     <?php include('background.php'); ?>
 
@@ -41,7 +41,7 @@ if ($res == true && mysqli_num_rows($res) == 1) {
         <?php
             $userId = $_SESSION['userId'];
 
-            $sql = "SELECT * FROM adoptionapplication WHERE userId = '$userId'";
+            $sql = "SELECT * FROM adoptionapplication WHERE userId = '$userId' && applicationStatus = '1'";
             $res = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($res);
             
@@ -88,7 +88,7 @@ if ($res == true && mysqli_num_rows($res) == 1) {
             <div style="padding-left: 115px;">
                 <!-- User Profile Frame -->
                 <div class="profile-frame">
-                    <img src="img/user/user_default.jpg" class="center" style="padding-bottom: 20px;" width="170px;"/>
+                    <!-- <img src="img/user/user_default.jpg" class="center" style="padding-bottom: 20px;" width="170px;"/> -->
                     <h2 style="text-align: center; margin-bottom: 20px; color: #5e57c2;">User Profile</h2>
                     <form action="updateProfile.php" id="userProfileForm" method="POST">
                         <table style="width:100%;">

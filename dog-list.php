@@ -51,7 +51,7 @@ $count = mysqli_num_rows($res);
             <ul>
                 <li><a href="pet-list.php"><p class="glow-font">All</p></a></li>
                 <li><a href="cat-list.php"><p class="glow-font">Cats</p></a></li>
-                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="dogList.php"><p>Dogs</p></a></li>
+                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="dog-list.php"><p>Dogs</p></a></li>
             </ul>
         </div>
         <div class="product-grid">

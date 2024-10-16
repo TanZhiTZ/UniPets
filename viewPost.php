@@ -1,6 +1,8 @@
 <?php
 include('config/constants.php');
 
+$role = $_SESSION['role'];
+
 if(isset($_GET['postId'])) {
     $postId = $_GET['postId'];
 
@@ -42,7 +44,7 @@ if(isset($_POST['submit_comment'])) {
     }
 }
 
-$sqlComments = "SELECT c.content, c.dateCommented, u.userName FROM comment c JOIN user u ON c.userId = u.userId WHERE c.postId = ? ORDER BY c.dateCommented DESC";
+$sqlComments = "SELECT c.commentId, c.content, c.dateCommented, u.userName FROM comment c JOIN user u ON c.userId = u.userId WHERE c.postId = ? ORDER BY c.dateCommented DESC";
 $stmtComments = mysqli_prepare($conn, $sqlComments);
 mysqli_stmt_bind_param($stmtComments, "i", $postId);
 mysqli_stmt_execute($stmtComments);
@@ -55,6 +57,7 @@ $resComments = mysqli_stmt_get_result($stmtComments);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?> | UniPets Forum</title>
     <link rel="stylesheet" href="css/forumStyle.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -155,12 +158,20 @@ $resComments = mysqli_stmt_get_result($stmtComments);
         <div class="comments-display">
             <h2>Comments</h2>
             <?php
-            if(mysqli_num_rows($resComments) > 0) {
-                while($comment = mysqli_fetch_assoc($resComments)) {
-                    echo "<div class='comment'>
+            if (mysqli_num_rows($resComments) > 0) {
+                while ($comment = mysqli_fetch_assoc($resComments)) {
+                    $commentId = $comment['commentId'];
+            
+                    echo "<div class='comment' id='comment-$commentId'>
                             <p class='comment-content'>" . htmlspecialchars($comment['content']) . "</p>
-                            <p class='comment-meta'>By: " . htmlspecialchars($comment['userName']) . " on " . htmlspecialchars($comment['dateCommented']) . "</p>
-                          </div>";
+                            <p class='comment-meta'>By: " . htmlspecialchars($comment['userName']) . " on " . htmlspecialchars($comment['dateCommented']) . "</p>";
+            
+                    // Display delete button if user is admin
+                    if ($_SESSION['role'] == 'admin') {
+                        echo "<span class='delete-comment-btn' onclick='confirmDeleteComment($commentId)'>Delete Comment</span>";
+                    }
+            
+                    echo "</div>";
                 }
             } else {
                 echo "<p>No comments yet. Be the first to comment!</p>";
@@ -168,5 +179,29 @@ $resComments = mysqli_stmt_get_result($stmtComments);
             ?>
         </div>
     </div>
+
+<script>
+    function confirmDeleteComment(commentId) {
+        if (confirm('Are you sure you want to delete this comment?')) {
+            $.ajax({
+                url: 'deleteComment.php',
+                type: 'POST',
+                data: { commentId: commentId },
+                success: function(response) {
+                    if (response === 'success') {
+                        // Remove the deleted comment from the DOM
+                        $('#comment-' + commentId).remove();
+                    } else {
+                        alert('Failed to delete comment. Please try again.');
+                    }
+                },
+                error: function() {
+                    alert('Error occurred while deleting comment.');
+                }
+            });
+        }
+    }
+</script>
+
 </body>
 </html>
