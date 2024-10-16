@@ -1,6 +1,9 @@
 <?php
 include('config/constants.php');
 
+$role = $_SESSION['role'];
+$userId = $_SESSION['userId'];
+
 $period = isset($_GET['period']) ? $_GET['period'] : 'all';
 $sql = "";
 
@@ -22,24 +25,31 @@ $count = mysqli_num_rows($res);
 if($count > 0) {
     while($row = mysqli_fetch_assoc($res)) {
         $postId = $row['postId'];
-        $userId = $row['userId'];
-        $userName = $row['userName'];
+        $userIdPost = $row['userId'];
+        $userNamePost = $row['userName'];
         $title = $row['title'];
+        $content = $row['content'];
         $dateCreated = $row['dateCreated'];
 
-        echo "
-        <li class='forum-post'>
-            <div class='forum-post-details'>
-                <a href='viewPost.php?postId=$postId' class='forum-post-title'>$title</a>
-                <p class='forum-post-meta'>Date: $dateCreated <br/> 
-                Author: <a href='viewAuthor.php?userId=$userId'>$userName</a></p>
-            </div>
-            <div class='forum-post-votes'>
-                <span class='thumb'>👍</span><span>like</span>
-            </div>
-        </li>";
+        echo "<li class='forum-post' id='post-$postId'>
+                <div class='forum-post-details'>
+                    <a href='viewPost.php?postId=$postId' class='forum-post-title'>$title</a>
+                    <p class='forum-post-meta'>Date: $dateCreated <br/>
+                    Author: <a href='viewAuthor.php?userId=$userIdPost'>$userNamePost</a></p>
+                    <p class='forum-post-content'>" . nl2br(htmlspecialchars($content)) . "</p>
+                </div>";
+
+        // Allow user to delete/edit if they are the author or admin
+        if ($role == "admin" || $userId == $userIdPost) {
+            echo "<div class='forum-post-options'>
+                    <span class='edit-post-btn' onclick='editPost($postId)'>Edit Post</span>--------------------
+                    <span class='delete-post-btn' onclick='confirmDelete($postId)'>Delete Post</span>
+                    </div>";
+        }
+
+        echo "</li>";
     }
 } else {
-    echo "<p>No posts available for this period.</p>";
+    echo "<p>No posts available.</p>";
 }
 ?>

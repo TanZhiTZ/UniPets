@@ -48,7 +48,7 @@ $count = mysqli_num_rows($res);
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="petList.php"><p>All</p></a></li>
+                <li style="background-color: #5291f7; border-radius: 20px;" class="glow-button"><a href="pet-list.php"><p>All</p></a></li>
                 <li><a href="cat-list.php"><p class="glow-font">Cats</p></a></li>
                 <li><a href="dog-list.php"><p class="glow-font">Dogs</p></a></li>
             </ul>

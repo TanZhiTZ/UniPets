@@ -19,10 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/background.scss">
+        <link rel="stylesheet" href="css/spinner.css">
     </head>
     <body>
     
-    <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- Loader Spinner -->
+    <svg id="loader" class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+    
+    <div class="page-content" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 20px; font-family: Arial, sans-serif;">
         
         <!-- Payment Options -->
         <form id="paymentForm" action="" method="POST">
@@ -83,6 +89,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <script>
+        // Set a timer for the page content to appear after a specified delay
+        window.addEventListener('load', function() {
+            var delayTime = 3000;
+
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+                document.querySelector('.page-content').style.display = 'block';
+            }, delayTime);
+        });
+
         const selectedPayment = "<?php echo htmlspecialchars($paymentMethod); ?>";
         console.log(selectedPayment);
 
