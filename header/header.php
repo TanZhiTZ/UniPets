@@ -1,33 +1,39 @@
 <?php
-include 'config/config.php';
 
-$_SESSION['rand'] = null;
 
-if(isset($_POST['submit'])){
- 
- $email = mysqli_real_escape_string($conn, $_POST['email']);
- $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
-
- $select = mysqli_query($conn, "SELECT * FROM `user` WHERE email = '$email' AND password = '$pass'") or die('query failed');
-
- if(mysqli_num_rows($select) > 0){
-    $row = mysqli_fetch_assoc($select);
-    $_SESSION['userId'] = $row['userId'];
-    $_SESSION['userName'] = $row['userName'];
-    $_SESSION['userEmail'] = $row['email'];
-    $_SESSION['role'] = $row['role'];
-    $role = $_SESSION['role'];
-    
-    if ($role == "user") {
-        header('location:login.php');
-    } else if ($role == "admin") {
-        header('location:admin/admin-index.php');
+if(isset($_POST['submit'])) {
+    // Sanitize email
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die('Invalid email format');
     }
+    $pass = mysqli_real_escape_string($conn, $_POST['password']);
 
- }else{
-    echo '<script>alert("Incorrect email or password!")</script>';
- }
+    $select = mysqli_query($conn, "SELECT * FROM `user` WHERE email = '$email'") or die('query failed');
 
+    if(mysqli_num_rows($select) > 0) {
+        $row = mysqli_fetch_assoc($select);
+        $storedHashedPassword = $row['password'];
+
+        // Verify the password using password_verify()
+        if (password_verify($pass, $storedHashedPassword)) {
+            $_SESSION['userId'] = $row['userId'];
+            $_SESSION['userName'] = $row['userName'];
+            $_SESSION['userEmail'] = $row['email'];
+            $_SESSION['role'] = $row['role'];
+            $role = $_SESSION['role'];
+
+            if ($role == "user") {
+                header('location:index.php');
+            } else if ($role == "admin") {
+                header('location:admin/admin-index.php');
+            }
+        } else {
+            echo '<script>alert("Wrong email or password!")</script>';
+        }
+    } else {
+        echo '<script>alert("Wrong email or password!")</script>';
+    }
 }
 ?>
 
@@ -61,23 +67,62 @@ if(isset($_POST['submit'])){
                     ini_set('display_errors', 0);
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if ($_POST['cpassword']) {
-                            $name = mysqli_real_escape_string($conn, $_POST['name']);
+                            $name =  $_POST['name'];
+                            $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+
                             $email = mysqli_real_escape_string($conn, $_POST['email']);
-                            $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
-                            $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+                            $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+
+                            $pass = mysqli_real_escape_string($conn, $_POST['password']);
+                            $cpass = mysqli_real_escape_string($conn, $_POST['cpassword']);
                             $role = "user";
                             
-                            $select = mysqli_query($conn, "SELECT * FROM `user` WHERE email = '$email'") or die('query failed');
+                            $badWordsFilePath = "badwords.txt";
                             
+                            function loadBadWords($filePath) {
+                                if (!file_exists($filePath)) {
+                                    return [];
+                                }
+                                
+                                // Read the file and split into an array
+                                $badWords = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                
+                                return $badWords;
+                            }
+                            
+                            function containsInappropriateWords($string, $bad) {
+                                foreach ($bad as $word) {
+                                    if (stripos($string, $word) !== false) {
+                                        return true; // Inappropriate word found
+                                    }
+                                }
+                                return false;
+                            }
+                            
+                            $badWords = loadBadWords($badWordsFilePath);
+                            if (containsInappropriateWords($name, $badWords)) {
+                                echo '<script> alert("Please use a valid name without inappropriate words!");
+                                window.location.href = "index.php"; </script>';
+                            }
+
+                            $select = mysqli_query($conn, "SELECT * FROM `user` WHERE email = '$email'") or die('query failed');
+                            // Check if email already exists
                             $checkEmail = $conn->query("SELECT * FROM user WHERE email='$email'");
                             if ($checkEmail->num_rows > 0) {
-                                header('location:registerFailed.php');
+                                // header('location:registerFailed.php');
                             } else {
-                                $query = "INSERT INTO user (userName, email, password, role) VALUES ('$name', '$email', '$pass', '$role')";
-                                if ($conn->query($query)) {
-                                    header('location:register.php');
+                                if ($pass === $cpass) {
+                                    // Hash and salt the password
+                                    $hashedPassword = password_hash($pass, PASSWORD_BCRYPT);
+
+                                    $query = "INSERT INTO user (userName, email, password, role) VALUES ('$name', '$email', '$hashedPassword', '$role')";
+                                    if ($conn->query($query)) {
+                                        header('location:register.php');
+                                    } else {
+                                        echo 'Error: ' . $conn->error;
+                                    }
                                 } else {
-                                    echo 'Error: ' . $conn->error;
+                                    echo 'Passwords do not match!';
                                 }
                             }
                         }

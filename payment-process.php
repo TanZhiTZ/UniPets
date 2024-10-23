@@ -7,6 +7,8 @@ $userName = $_SESSION['userName'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $paymentAmount = $_POST['paymentAmount'];
     $paymentMethod = $_POST['paymentMethod'];
+    $address1 = $_POST['addressLine1'];
+    $address2 = $_POST['addressLine2'];
 }
 ?>
 

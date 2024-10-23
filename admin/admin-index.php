@@ -20,9 +20,9 @@ if (isset($_SESSION['role'])) {
     <link rel="stylesheet" href="css/adminStyle.css">
 </head>
 <body>
+    <?php include('sidebar.php'); ?>
     <?php include('header.php'); ?>
     <div class="container">
-        <?php include('sidebar.php'); ?>
         <div class="main-content">
             <h2>Welcome to the Admin Dashboard</h2>
             <p>Select a section from the sidebar to manage.</p>

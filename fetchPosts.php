@@ -1,5 +1,6 @@
 <?php
 include('config/constants.php');
+ini_set('display_errors', 0);
 
 $role = $_SESSION['role'];
 $userId = $_SESSION['userId'];
@@ -36,7 +37,6 @@ if($count > 0) {
                     <a href='viewPost.php?postId=$postId' class='forum-post-title'>$title</a>
                     <p class='forum-post-meta'>Date: $dateCreated <br/>
                     Author: <a href='viewAuthor.php?userId=$userIdPost'>$userNamePost</a></p>
-                    <p class='forum-post-content'>" . nl2br(htmlspecialchars($content)) . "</p>
                 </div>";
 
         // Allow user to delete/edit if they are the author or admin

@@ -1,5 +1,6 @@
 <?php
 include('config/constants.php');
+ini_set('display_errors', 0);
 
 $role = $_SESSION['role'];
 
@@ -26,6 +27,8 @@ if(isset($_GET['postId'])) {
 
 if(isset($_POST['submit_comment'])) {
     $commentContent = $_POST['comment'];
+    // Sanitizing
+    $commentContent = htmlspecialchars($commentContent, ENT_QUOTES, 'UTF-8');
     
     if (isset($_SESSION['userId'])) {
         $userId = $_SESSION['userId'];
@@ -40,7 +43,7 @@ if(isset($_POST['submit_comment'])) {
             echo "<p>Error posting comment. Please try again.</p>";
         }
     } else {
-        echo "<p>Please login to comment.</p>";
+        echo "<p style='text-align: center; color: red;'>Please login to comment.</p>";
     }
 }
 

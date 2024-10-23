@@ -79,15 +79,28 @@ body {
     color: #888;
 }
 
-.forum-post-votes {
+.edit-post-btn {
     display: flex;
     align-items: center;
     font-size: 18px;
-    color: #ff9900;
+    color: #ff0e0e;
+    cursor: pointer;
 }
 
-.forum-post-votes .thumb {
-    margin-right: 5px;
+.delete-post-btn {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #ff0e0e;
+    cursor: pointer;
+}
+
+.delete-comment-btn {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 18px;
+    color: #ff0e0e;
+    cursor: pointer;
 }
 
 .forum-btn {
@@ -140,6 +153,59 @@ body {
     background-color: #6d6d6d;
 }
 
+.forum-post-form {
+    margin-bottom: 20px;
+}
+
+#new-post-button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#new-post-button:hover {
+    background-color: #434343;
+}
+
+#create-post-form input[type="text"],
+#create-post-form textarea {
+    width: 98%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+#create-post-form input[type="text"]:focus,
+#create-post-form textarea:focus {
+    border-color: #007bff;
+}
+
+#create-post-form button {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#create-post-form button:hover {
+    background-color: #218838;
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -150,9 +216,5 @@ body {
     .forum-post {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .forum-post-votes {
-        margin-top: 10px;
     }
 }

@@ -35,7 +35,6 @@ if(isset($_GET['userId'])) {
     <div class="author-container">
         <div class="author-card">
             <h1><?php echo $userName; ?></h1>
-            <p><strong>Role:</strong> <?php echo $role; ?></p>
 
             <?php if($country != null): ?>
             <p><strong>Country:</strong> <?php echo $country; ?></p>

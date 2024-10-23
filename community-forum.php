@@ -1,6 +1,8 @@
 <?php
 include('config/constants.php');
 
+ini_set('display_errors', 0);
+
 $userId = $_SESSION['userId'];
 $userName = $_SESSION['userName'];
 $role = $_SESSION['role'];
@@ -22,17 +24,21 @@ $count = mysqli_num_rows($res);
 <body>
     <div class="forum-container">
         <!-- Forum Post Form -->
-        <div class="forum-post-form" style="text-align: center;">
-            <h2>Create a New Post</h2>
-            <button id="new-post-button">+ New Post</button>
-            <form action="createPost.php" method="POST" id="create-post-form" style="display: none;">
-                <input type="text" name="title" placeholder="Enter post title" required>
-                <textarea name="content" placeholder="Enter post content" rows="5" required></textarea>
-                <input type="hidden" name="userId" value="<?php echo $userId; ?>">
-                <input type="hidden" name="userName" value="<?php echo $userName; ?>">
-                <button type="submit">Post</button>
-            </form>
-        </div>
+         <?php if (isset($_SESSION['userId'])) { ?>
+            
+            <div class="forum-post-form" style="text-align: center;">
+                <h2>Create a New Post</h2>
+                <button id="new-post-button">+ New Post</button>
+                <form action="createPost.php" method="POST" id="create-post-form" style="display: none;">
+                    <input type="text" name="title" placeholder="Enter post title" required>
+                    <textarea name="content" placeholder="Enter post content" rows="5" required></textarea>
+                    <input type="hidden" name="userId" value="<?php echo $userId; ?>">
+                    <input type="hidden" name="userName" value="<?php echo $userName; ?>">
+                    <button type="submit">Post</button>
+                </form>
+            </div>
+            
+        <?php } ?>
 
         <!-- Forum Posts List -->
         <div class="forum-header">

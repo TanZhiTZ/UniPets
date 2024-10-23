@@ -41,6 +41,16 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
+.history-frame {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border: 1px solid #5e57c2;
+    border-radius: 15px;
+    padding: 50px 50px;
+    width: 90%;
+    margin: 20px auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
 .profile-textbox, .profile-dropdown {
     width: 100%;
     padding: 10px;
@@ -1059,7 +1069,6 @@ hr {
     background-color: #fff;
     border-top: 1px solid #f1f1f1;
     z-index: 999;
-    opacity: .9;
 }
 
 .footer-left {
@@ -1637,6 +1646,14 @@ select {
 
 .results-btn:hover {
     background-color: #4B0082;
+}
+
+.page-content {
+    display: none;
+}
+
+.purchaseHistory {
+
 }
 
 @-moz-keyframes scroll-left {

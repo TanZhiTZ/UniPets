@@ -16,6 +16,10 @@ if ($res == true && mysqli_num_rows($res) == 1) {
     $aboutMe = isset($row['aboutMe']) ? $row['aboutMe'] : "";
 }
 
+// Fetch purchase data for the user
+$sql = "SELECT * FROM purchaseorder WHERE userId = '$userId' ORDER BY orderDate DESC";
+$purchaseRes = mysqli_query($conn, $sql);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,9 +69,9 @@ if ($res == true && mysqli_num_rows($res) == 1) {
                             
                             echo "
                             <div class='alert alert-success' style='margin: 20px; padding: 20px; border-radius: 10px;'>
-                                <h4>Your adoption application for <a href='pet-description.php?pet_id=$petId' style='font-size: 20px; color: #3b85b6; text-decoration: none;'><strong>$petName</strong></a> is under review!</h4>
+                                <h4>Your adoption application for <a href='pet-description.php?pet_id=$petId' style='font-size: 20px; color: #3b85b6; text-decoration: none;'><strong>$petName</strong></a> is submitted!</h4>
                                 <p style='color: black;'>Application Date: ".date('F j, Y, g:i a', strtotime($applicationDate))."</p>
-                                <p style='color: black;'>Days left before review expires: <span style='color: red;' id='countdown'>$daysRemaining</span> days</p>
+                                <p style='color: black;'>Days left before application expires: <span style='color: red;' id='countdown'>$daysRemaining</span> days</p>
                             </div>";
     
                             
@@ -163,9 +167,45 @@ if ($res == true && mysqli_num_rows($res) == 1) {
                         <button type="submit" name="submit" class="buttondeco">Submit</button>
                     </form>
                 </div>
-
             </div>
         </div>
+
+        <!-- User Purchase List -->
+        <h2 style="padding-left: 70px;">Recent Purchases</h2>
+        <div class="history-frame" style="text-align: center;">
+        <?php
+        if ($purchaseRes == true && mysqli_num_rows($purchaseRes) > 0) {
+            echo "<table class='table table-striped'>";
+            echo "<thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Total Amount</th>
+                        <th>Payment Method</th>
+                    </tr>
+                  </thead>";
+            echo "<tbody>";
+            while ($row = mysqli_fetch_assoc($purchaseRes)) {
+                $orderId = $row['orderId'];
+                $orderDate = date('F j, Y, g:i a', strtotime($row['orderDate']));
+                $totalAmount = $row['totalAmount'];
+                $paymentMethod = $row['paymentMethod'];
+
+                echo "<tr class='purchaseHistory'>
+                        <td>$orderId</td>
+                        <td>$orderDate</td>
+                        <td>RM $totalAmount</td>
+                        <td>$paymentMethod</td>
+                      </tr>";
+            }
+            echo "</tbody>";
+            echo "</table>";
+        } else {
+            echo "<div class='alert alert-info'>You have no recent purchases.</div>";
+        }
+        ?>
+    </div>
+
     <br/><br/>
 
     <?php include('header/footer.php'); ?>
@@ -182,7 +222,7 @@ if ($res == true && mysqli_num_rows($res) == 1) {
             }
         }
 
-        // Update the countdown every day
+        // Update the countdown everyday
         setInterval(updateCountdown, 24 * 60 * 60 * 1000);
     </script>
     </body>
