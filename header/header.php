@@ -155,7 +155,7 @@ if(isset($_POST['submit'])) {
                 </div>
                 <br/><div style="width:90%; width:100%;"><hr color="#999999"></div><br/>
                 <div class="field">
-                    <a style="font-family:'verdana'" href="password-reset.php">Forgot password?</a>
+                    <!--<a style="font-family:'verdana'" href="password-reset.php">Forgot password?</a>-->
                 </div>
             </form>
         </div>
