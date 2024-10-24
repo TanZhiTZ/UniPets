@@ -107,7 +107,7 @@ a {
                 <p>Hours: 10 AM - 12:30 PM, 2 PM - 6:30 PM (Monday - Friday), 10 AM - 2:30 PM (Weekends)</p>
             </li>
             <li>
-                <<a href="https://maps.app.goo.gl/uknXHh5WjM9nkW2L8" target="_BLANK">h3>AcuVet Veterinary Clinic</h3></a>
+                <a href="https://maps.app.goo.gl/uknXHh5WjM9nkW2L8" target="_BLANK"><h3>AcuVet Veterinary Clinic</h3></a>
                 <p>Address: 25E Jalan Gottlieb, 10350 George Town, Penang</p>
                 <p>Phone: 04-226 4536</p>
                 <p>Hours: 9 AM - 1 PM, 2 PM - 6 PM (Monday - Saturday), 9 AM - 1 PM, 2 PM - 5:30 PM (Sunday)</p>
