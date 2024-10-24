@@ -22,6 +22,9 @@ $count = mysqli_num_rows($res);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <!-- link to view available vets -->
+     <a href="vet.php" style="padding: 10px 20px 0 0; display: flex; justify-content: flex-end;">View Veterinary in Penang</a>
+
     <div class="forum-container">
         <!-- Forum Post Form -->
          <?php if (isset($_SESSION['userId'])) { ?>
