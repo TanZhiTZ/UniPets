@@ -139,9 +139,19 @@ $donationAmount = htmlspecialchars($donationAmount, ENT_QUOTES, 'UTF-8');
     </form>
 </div>
 
-    <script>
-        const selectedPayment = "<?php echo htmlspecialchars($paymentMethod); ?>";
-        console.log(selectedPayment);
+<script>
+    // Set a timer for the page content to appear after a specified delay
+    window.addEventListener('load', function() {
+        var delayTime = 3000;
+
+        setTimeout(function() {
+            document.getElementById('loader').style.display = 'none';
+            document.querySelector('.page-content').style.display = 'block';
+        }, delayTime);
+    });
+
+    const selectedPayment = "<?php echo htmlspecialchars($paymentMethod); ?>";
+    console.log(selectedPayment);
 
     if (selectedPayment === 'Debit Card' || selectedPayment === 'Credit Card') {
         debitCardFields.classList.remove('hidden');

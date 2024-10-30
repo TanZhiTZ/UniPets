@@ -83,6 +83,14 @@ if($count>0)
             <div class="profile-right">
                 <div class="profile-call-to-action">
                     <h2 style="color: white; text-align: center;">Cart</h2>
+                    <div class="quantity-container" style="display:flex; justify-content: space-between;">
+                        <label for="price">Price</label>
+                        <label for="pricetag" style="">RM<?php echo $price; ?></label>
+                    </div>
+                    <div class="quantity-container" style="display:flex; justify-content: space-between;">
+                        <label for="stock">Available Stock</label>
+                        <label for="availableStock" style=""><?php echo $stockQuantity; ?></label>
+                    </div>
                     <div class="quantity-container">
                         <label for="quantity">Quantity</label>
                         <div class="quantity-input">
@@ -93,7 +101,6 @@ if($count>0)
                     </div>
                     <div>
                         <button class="cart-btn" onclick="addToCart(<?php echo $accessoriesId; ?>)">Add To Cart</button>
-                        <!-- <button class="buy-btn">Buy Now</button> -->
                     </div>
                 </div>
             </div>

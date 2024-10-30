@@ -19,13 +19,31 @@ $result = $conn->query($sql);
 // Function to delete a user
 if (isset($_POST['deleteUser'])) {
     $userId = $_POST['userId'];
+
     $deleteSQL = "DELETE FROM user WHERE userId = $userId";
     if ($conn->query($deleteSQL) === TRUE) {
         echo "User deleted successfully.";
-        header("Refresh:0");
     } else {
         echo "Error deleting user: " . $conn->error;
     }
+
+    // Deleting all the data related to userId from other table as well.
+    $deleteAdoptionSQL = "DELETE FROM adoptionapplication WHERE userId = $userId";
+    $conn->query($deleteAdoptionSQL);
+
+    $deleteCartItemSQL = "DELETE FROM cartitem WHERE userId = $userId";
+    $conn->query($deleteCartItemSQL);
+
+    $deletePostSQL = "DELETE FROM post WHERE userId = $userId";
+    $conn->query($deletePostSQL);
+
+    $deleteCommentSQL = "DELETE FROM comment WHERE userId = $userId";
+    $conn->query($deleteCommentSQL);
+
+    $deletePurchaseSQL = "DELETE FROM purchaseorder WHERE userId = $userId";
+    $conn->query($deletePurchaseSQL);
+
+    header("Refresh:0");
 }
 
 // Function to update user details

@@ -2,6 +2,8 @@
 include('config/constants.php');
 
 $petId = $_GET['pet_id'];
+
+if (isset($_SESSION['userId']))
 $userId = $_SESSION['userId'];
 
 $sql = "SELECT * FROM pet WHERE petId='$petId'";
@@ -117,8 +119,13 @@ if($count>0)
                         $count = mysqli_num_rows($res);
 
                         if ($count == 0) {
-                            echo "<a href='adoption-inquiry.php?pet_id=$petId' style='text-decoration: none;'>
-                                <button class='cta-button inquiry'>Start Your Inquiry</button></a>";
+                            if (isset($_SESSION['userId'])) {
+                                echo "<a href='adoption-inquiry.php?pet_id=$petId' style='text-decoration: none;'>
+                                    <button class='cta-button inquiry'>Start Your Inquiry</button></a>";
+                            } else {
+                                echo "<a style='text-decoration: none;'>
+                                    <button class='cta-button inquiry' style='color: grey;' inactive>Login to start inquiry</button></a>";
+                            }
                         } else {
                             echo "<a style='text-decoration: none;'>
                                 <button class='cta-button inquiry' style='color: red;' disabled>Inquiry Submitted</button></a>";

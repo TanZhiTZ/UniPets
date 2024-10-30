@@ -32,7 +32,9 @@
                 <tbody>
                     <?php
                     // Retrieve all donations from the 'donation' table
-                    $sql = "SELECT donationId, donorName, donationDate, donationAmount, paymentMethod FROM donation";
+                    $sql = "SELECT donationId, donorName, donationDate, donationAmount, paymentMethod 
+                    FROM donation 
+                    ORDER BY donationDate DESC";
                     $res = mysqli_query($conn, $sql);
 
                     // Check if there are any donations

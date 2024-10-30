@@ -85,16 +85,100 @@
     </section>
 
     <!-- Safe Space at Home Section -->
-    <section id="safe-space" style="text-align: center;">
-        <h2>Creating a Safe Space at Home</h2>
+    <section id="safe-space">
+        <h2 style="text-align: center;">Facts and way to take care of newly adopted pets</h2>
         <div class="content">
             <div class="home-section">
-                <h3>For Dogs</h3>
-                <p style="color: black;">Set up a quiet area with their bed, toys, and food. Keep it clutter-free and hazard-free.</p>
-            </div>
-            <div class="home-section">
-                <h3>For Cats</h3>
-                <p style="color: black;">Provide a cozy spot with a scratching post, toys, and their litter box in a quiet area of your home.</p>
+            <h2>1. Preparing for the Arrival</h2>
+                <ul>
+                    <li><strong>Comfortable Environment:</strong> Prepare a cozy bed, food and water bowls, and a quiet place where they feel secure. Dogs may appreciate a crate for training and comfort, while cats will appreciate a quiet, secluded spot to adjust.</li>
+                    <li><strong>Pet-Proofing:</strong> Check for hazardous items (electrical cords, small objects, toxic plants) and secure them out of reach. Keep cleaning supplies, medications, and human foods stored away as many can be toxic to pets.</li>
+                    <li><strong>Basic Supplies:</strong>
+                        <ul>
+                            <li><strong>Cats:</strong> Litter box, scratching posts, interactive toys.</li>
+                            <li><strong>Dogs:</strong> Leash, collar, durable toys, possibly a crate or bed.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>2. Building Trust and Bonding</h2>
+                <ul>
+                    <li><strong>Routine and Consistency:</strong> Keep feeding, potty breaks, and playtimes consistent to establish a sense of security.</li>
+                    <li><strong>Positive Reinforcement:</strong> Reward good behavior with treats, praise, and petting to build a strong bond. This also helps pets learn desirable behaviors faster.</li>
+                    <li><strong>Personal Space:</strong> Especially for cats, it’s essential to give them space to explore on their own. Avoid forcing interactions; let them come to you.</li>
+                </ul>
+
+                <h2>3. Basic Healthcare</h2>
+                <ul>
+                    <li><strong>Veterinary Visits:</strong> Schedule a wellness exam within the first week. Routine checkups every six months to a year are recommended. This includes vaccinations, parasite control, and health screenings.</li>
+                    <li><strong>Spaying/Neutering:</strong> This not only prevents unwanted litters but can also reduce behavioral issues and lower the risk of certain cancers.</li>
+                    <li><strong>Grooming:</strong>
+                        <ul>
+                            <li><strong>Cats:</strong> Brush regularly to minimize hairballs and maintain coat health. Some cats may need nail trims if they don’t naturally wear them down.</li>
+                            <li><strong>Dogs:</strong> Brush based on coat type, bathe as needed, and trim nails every 3-4 weeks to avoid overgrowth and discomfort.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Dental Care:</strong> Brush their teeth a few times a week or use dental chews to prevent gum disease, which is common in both cats and dogs.</li>
+                </ul>
+
+                <h2>4. Proper Nutrition</h2>
+                <ul>
+                    <li><strong>Quality Food:</strong> Feed high-quality pet food suited to their age, size, and breed. Many cats and dogs are sensitive to low-quality fillers and artificial ingredients.</li>
+                    <li><strong>Meal Times:</strong> Avoid overfeeding by adhering to recommended portion sizes. Some cats do well with free feeding, but dogs should have set meal times to avoid bloating and overeating.</li>
+                    <li><strong>Special Diets:</strong> Older pets or those with health issues may need specific diets, so consult with a veterinarian for recommendations.</li>
+                </ul>
+
+                <h2>5. Exercise and Mental Stimulation</h2>
+                <ul>
+                    <li><strong>Daily Exercise:</strong>
+                        <ul>
+                            <li><strong>Dogs:</strong> At least one daily walk, but active breeds may require more. Provide space to run and play or consider a dog park for socialization.</li>
+                            <li><strong>Cats:</strong> Even indoor cats need exercise. Use toys like feather wands, laser pointers, or automated cat toys to keep them engaged.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Mental Enrichment:</strong>
+                        <ul>
+                            <li><strong>Cats:</strong> Puzzle feeders, treat-dispensing toys, and cat towers or shelves for climbing and exploring.</li>
+                            <li><strong>Dogs:</strong> Hide-and-seek games, training sessions, interactive toys, and basic obedience exercises keep them mentally engaged.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>6. Training and Behavior Management</h2>
+                <ul>
+                    <li><strong>Training Basics:</strong>
+                        <ul>
+                            <li><strong>Dogs:</strong> Focus on obedience training—sit, stay, come, and leash walking.</li>
+                            <li><strong>Cats:</strong> While cats are often more independent, you can train them to come when called, use scratching posts, and stay off certain surfaces.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Handling Behavioral Issues:</strong>
+                        <ul>
+                            <li><strong>Dogs:</strong> Barking, jumping, and chewing can often be managed through redirection and positive reinforcement.</li>
+                            <li><strong>Cats:</strong> Litter box issues, scratching furniture, or excessive meowing can usually be addressed by meeting their needs and adjusting the environment.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Socialization:</strong> Expose pets to various environments, people, and other animals at a comfortable pace. This helps them feel confident and reduces anxiety.</li>
+                </ul>
+
+                <h2>7. Recognizing and Addressing Health Issues</h2>
+                <ul>
+                    <li><strong>Common Cat Issues:</strong> Hairballs, dental disease, and obesity are common. Watch for signs of illness like hiding, changes in litter box habits, or decreased grooming.</li>
+                    <li><strong>Common Dog Issues:</strong> Arthritis, ear infections, and dental issues are typical in dogs. Monitor for limping, itching, or changes in energy and eating habits.</li>
+                    <li><strong>Signs of Distress:</strong> Watch for symptoms like lethargy, loss of appetite, or vomiting, and consult a vet if anything unusual appears.</li>
+                </ul>
+
+                <h2>8. Safety and Outdoor Precautions</h2>
+                <ul>
+                    <li><strong>Microchipping:</strong> Microchip your pet and keep ID tags up to date to help ensure a safe return if they get lost.</li>
+                    <li><strong>Leash and Harness:</strong>
+                        <ul>
+                            <li><strong>Dogs:</strong> Always use a secure harness or collar and leash when outside.</li>
+                            <li><strong>Cats:</strong> If allowing them outdoors, a secure harness and leash prevent escapes and keep them safe.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Temperature Safety:</strong> In hot weather, provide plenty of water and limit outdoor time. During colder months, ensure they stay warm, especially short-haired breeds.</li>
+                </ul>
             </div>
         </div>
     </section>
