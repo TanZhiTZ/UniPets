@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Sanitize payment method
     $paymentMethod = $_POST['paymentMethod'];
-    $paymentMethod = htmlspecialchars($paymentMethod, ENT_QUOTES, 'UTF-8');
 }
+$paymentMethod = htmlspecialchars($paymentMethod, ENT_QUOTES, 'UTF-8');
 $donationAmount = htmlspecialchars($donationAmount, ENT_QUOTES, 'UTF-8');
 ?>
 
@@ -126,7 +126,7 @@ $donationAmount = htmlspecialchars($donationAmount, ENT_QUOTES, 'UTF-8');
                 if ($count == 0) {
                     $query = "INSERT INTO donation (donationId, donorName, donationAmount, paymentMethod) VALUES (?, ?, ?, ?)";
                     $stmt = $conn->prepare($query);
-                    $stmt->bind_param('issi', $donationId, $donorName, $donationAmount, $paymentMethod);
+                    $stmt->bind_param('isss', $donationId, $donorName, $donationAmount, $paymentMethod);
                     if ($stmt->execute()) {
                         header('location:donation-receipt.php?donationId=' . $donationId);
                     } else {
