@@ -45,6 +45,7 @@ if ($count == 0) {
                 $i = '0';
                 while($row=mysqli_fetch_assoc($res))
                 {
+                    ini_set('display_errors', 0);
                     $accessoriesId = $row['accessoriesId'];
                     $quantity = $row['quantity'];
 
@@ -56,6 +57,7 @@ if ($count == 0) {
                     $productImg = $accessories['productImg'];
                     $productName = $accessories['productName'];
                     $price = $accessories['price'];
+                    $stockQuantity = $accessories['stockQuantity'];
 
                     echo "
                     <!-- Cart Item -->
@@ -68,7 +70,7 @@ if ($count == 0) {
                         <div class='quantity-input cart-controls'>
                             <button class='quantity-btn' onclick='decrement($i, $accessoriesId, $price)'>-</button>
                             <input class='quantity-content' type='text' id='quantity$i' value='$quantity' readonly>
-                            <button class='quantity-btn' onclick='increment($i, $accessoriesId, $price)'>+</button>
+                            <button class='quantity-btn' onclick='increment($i, $accessoriesId, $price, $stockQuantity)'>+</button>
                         </div>
                         <div class='wrap'>
                             <span><button class='remove' onclick='deleteData($accessoriesId)'>Delete</button></span>
