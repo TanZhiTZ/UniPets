@@ -64,7 +64,7 @@ if(isset($_POST['submit'])) {
                 </div>
                 <!-- Registration php -->
                 <?php
-                    ini_set('display_errors', 0);
+                    //ini_set('display_errors', 0);
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if ($_POST['cpassword']) {
                             $name =  $_POST['name'];
@@ -103,27 +103,29 @@ if(isset($_POST['submit'])) {
                             if (containsInappropriateWords($name, $badWords)) {
                                 echo '<script> alert("Please use a valid name without inappropriate words!");
                                 window.location.href = "index.php"; </script>';
-                            }
-
-                            $select = mysqli_query($conn, "SELECT * FROM `user` WHERE email = '$email'") or die('query failed');
-                            // Check if email already exists
-                            $checkEmail = $conn->query("SELECT * FROM user WHERE email='$email'");
-                            if ($checkEmail->num_rows > 0) {
-                                // header('location:registerFailed.php');
                             } else {
-                                if ($pass === $cpass) {
-                                    // Hash and salt the password
-                                    $hashedPassword = password_hash($pass, PASSWORD_BCRYPT);
+                                
+                                                            $select = mysqli_query($conn, "SELECT * FROM `user` WHERE email = '$email'") or die('query failed');
+                                                            // Check if email already exists
+                                                            $checkEmail = $conn->query("SELECT * FROM user WHERE email='$email'");
+                                                            if ($checkEmail->num_rows > 0) {
+                                                                // header('location:registerFailed.php');
+                                                            } else {
+                                                                if ($pass === $cpass) {
+                                                                    // Hash and salt the password
+                                                                    $hashedPassword = password_hash($pass, PASSWORD_BCRYPT);
+                                
+                                                                    $query = "INSERT INTO user (userName, email, password, role) VALUES ('$name', '$email', '$hashedPassword', '$role')";
+                                                                    if ($conn->query($query)) {
+                                                                        header('location:register.php');
+                                                                    } else {
+                                                                        echo 'Error: ' . $conn->error;
+                                                                    }
+                                                                } else {
+                                                                    echo 'Passwords do not match!';
+                                                                }
 
-                                    $query = "INSERT INTO user (userName, email, password, role) VALUES ('$name', '$email', '$hashedPassword', '$role')";
-                                    if ($conn->query($query)) {
-                                        header('location:register.php');
-                                    } else {
-                                        echo 'Error: ' . $conn->error;
-                                    }
-                                } else {
-                                    echo 'Passwords do not match!';
-                                }
+                            }
                             }
                         }
                     }
