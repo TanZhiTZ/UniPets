@@ -48,28 +48,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $badWords = loadBadWords($badWordsFilePath);
     // Check for bad words
     if (containsInappropriateWords($firstName, $badWords)) {
-        echo '<script> alert("Invalid title!");
-        window.location.href = "community-forum.php"; </script>';
+        echo '<script> alert("Invalid name!");
+        window.location.href = "user-profile.php"; </script>';
         exit();
     }
     if (containsInappropriateWords($lastName, $badWords)) {
-        echo '<script> alert("Invalid content! Bad words detected!");
-        window.location.href = "community-forum.php"; </script>';
+        echo '<script> alert("Invalid name!");
+        window.location.href = "user-profile.php"; </script>';
         exit();
     }
     if (containsInappropriateWords($petsInterested, $badWords)) {
         echo '<script> alert("Invalid content! Bad words detected!");
-        window.location.href = "community-forum.php"; </script>';
+        window.location.href = "user-profile.php"; </script>';
         exit();
     }
     if (containsInappropriateWords($country, $badWords)) {
-        echo '<script> alert("Invalid content! Bad words detected!");
-        window.location.href = "community-forum.php"; </script>';
+        echo '<script> alert("Invalid country! Bad words detected!");
+        window.location.href = "user-profile.php"; </script>';
         exit();
     }
     if (containsInappropriateWords($aboutMe, $badWords)) {
         echo '<script> alert("Invalid content! Bad words detected!");
-        window.location.href = "community-forum.php"; </script>';
+        window.location.href = "user-profile.php"; </script>';
         exit();
     }
 
