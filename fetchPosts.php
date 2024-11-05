@@ -40,11 +40,15 @@ if($count > 0) {
                 </div>";
 
         // Allow user to delete/edit if they are the author or admin
-        if ($role == "admin" || $userId == $userIdPost) {
+        if ($userId == $userIdPost) {
             echo "<div class='forum-post-options'>
                     <span class='edit-post-btn' onclick='editPost($postId)'>Edit Post</span>--------------------
                     <span class='delete-post-btn' onclick='confirmDelete($postId)'>Delete Post</span>
-                    </div>";
+                  </div>";
+        } else if ($role == "admin") {
+            echo "<div class='forum-post-options'>
+                    <span class='delete-post-btn' onclick='confirmDelete($postId)'>Delete Post</span>
+                  </div>";
         }
 
         echo "</li>";

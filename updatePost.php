@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $res = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($res)) {
-        if ($row['userId'] == $userId || $role == 'admin') {
+        if ($row['userId'] == $userId) {
             // Update the post
             $updateSql = "UPDATE post SET title = ?, content = ? WHERE postId = ?";
             $updateStmt = mysqli_prepare($conn, $updateSql);
